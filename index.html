@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <title>Web Location</title>
+    <style>            
+#map {
+    height: 100%;
+}            
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div class="jumbotron text-grey ">
+        <div>
+            <h1 class="display-3 font-italic">Mark Location</h1>
+            <p><strong>Sua biblioteca de localizações</strong></p>
+        </div>
+    </div>
+        
+    <div class= " p-md-5 text-white  ">
+        <p>
+        <h1>Mapa</h1> 
+        <img src="img6.png" class="img-fluid"  width="200px" height="300px">
+        <p>Salve suas localizações desejadas </p>
+    </div>
+
+    <div id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
+    async defer></script>
+
+</div>
+
+<script>
+    if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+    .then(function () { console.log('service worker registered'); })
+    .catch (function () { console.warn('service worker failed'); });
+            
+    }
+</script>
+
+<div id="result"></div>
+
+<script>
+// verificar compatibilidade
+if (typeof(Storage) !== "undefined") {
+// Armazenar
+localStorage.setItem("Minha casa", "Endereco");
+// Recuperar
+document.getElementById("result").innerHTML
+= localStorage.getItem("nome");
+} else {
+document.getElementById("result").innerHTML
+= "O Navegador não suporta armazenamento local";
+
+}
+</script>
+
+    <!--
+    <script>  
+    var CACHE_NAME = 'static-v1';
+self.addEventListener('install', function (event) {
+event.waitUntil(
+caches.open(CACHE_NAME).then(function (cache) {
+return cache.addAll([
+'/',
+'/index.html',
+'/styles.css',
+'/app.js',
+'/manifest.js',
+'/vendor.js',
+]);
+})</script>
+
+    <script>
+    var CACHE_NAME = 'static-v1';
+ self.addEventListener('activate', function activator(event) {
+ event.waitUntil(caches.keys().then(function (keys) {
+ return Promise.all(keys.filter(function (key) {
+
+ return key.indexOf(CACHE_NAME) !== 0;}).map(function (key) {
+
+ return caches.delete(key);
+ })
+ );
+ })
+ );
+ });</script>
+    
+    <script>
+    self.addEventListener('fetch', function (event) {
+ event.respondWith(
+ caches.match(event.request).then(function (cachedResponse) {
+ return cachedResponse || fetch(event.request);
+ })
+ );
+ });
+    
+    caches.open(cacheName)
+        caches.open('example-cache').then(function(cache) {
+cache.add('/example-file.html');
+            caches.open('example-cache').then(function(cache) {
+ cache.matchAll('/images/').then(function(response) {
+ response.forEach(function(element, index, array) {
+ cache.delete(element);
+ });
+ });
+ })
+            cache.keys(request):
+    </script>
+!-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
+</body>
+
+</html>
